@@ -16,12 +16,15 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $adminUser = User::create([
+        $adminUser = User::factory()->create([
             "name" => "Admin",
             "email" => "admin@admin.be",
             "password" => Hash::make("password"),
             "organization" => "Admin",
             "ics" => null,
-        ])->createToken('API Token')->plainTextToken;
+        ]);
+        $adminUser->assignRole('admin');
+        $adminUser->assignRole('user');
+        $adminUser->assignRole('seller');
     }
 }

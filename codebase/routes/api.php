@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Middleware\IsAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/me', function(Request $request) {
-        return $request->user();
+        ray(new UserResource($request->user()));
+        return new UserResource($request->user());
+    });
+
+    Route::middleware(IsAdmin::class)->group(function () {
+        Route::get('/users', [AdminController::class, 'users']);
     });
 });
