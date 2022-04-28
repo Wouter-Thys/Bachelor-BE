@@ -1,0 +1,86 @@
+version: '3'
+
+services:
+  php:
+    extends:
+      file: ${DLLOCAL_PATH}/containers/php-fpm/8.1.yml
+      service: php
+    container_name: ${COMPOSE_PROJECT_NAME}-php
+    volumes:
+      - ${DLLOCAL_PATH}/${STORAGE_PATH}/persistent:/data/storage
+      - ${DLLOCAL_PATH}/${STORAGE_PATH}/codebase:/var/www/php:cached
+      - ${DLLOCAL_PATH}/${STORAGE_PATH}/persistent/laravel/storage:/var/www/php/storage
+      - ${DLLOCAL_PATH}/${STORAGE_PATH}/persistent/laravel/storage/app/public:/var/www/php/public/storage
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  scheduler:
+    image: dalukasdev/php-fpm:latest
+    container_name: ${COMPOSE_PROJECT_NAME}-scheduler
+    restart: always
+    depends_on:
+      - php
+    volumes:
+      - ${DLLOCAL_PATH}/${STORAGE_PATH}/codebase:/var/www/php:cached
+      - ${DLLOCAL_PATH}/${STORAGE_PATH}/persistent/laravel/storage:/var/www/php/storage
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    entrypoint:
+      [
+        "sh",
+        "-c",
+        "echo running schedular && php /var/www/php/artisan schedule:run --verbose --no-interaction & sleep 60"
+      ]
+  queue:
+    image: dalukasdev/php-fpm:latest
+    container_name: ${COMPOSE_PROJECT_NAME}-queue
+    restart: always
+    depends_on:
+      - php
+    volumes:
+      - ${DLLOCAL_PATH}/${STORAGE_PATH}/codebase:/var/www/php:cached
+      - ${DLLOCAL_PATH}/${STORAGE_PATH}/persistent/laravel/storage:/var/www/php/storage
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    entrypoint:
+      [
+        "/bin/sh",
+        "-c",
+        "echo running queue && php /var/www/php/artisan queue:work --queue=default --tries=3 --timeout=90"
+      ]
+
+  www:
+    extends:
+      file: ${DLLOCAL_PATH}/containers/nginx/1.21.6.yml
+      service: www
+    depends_on:
+      - php
+    container_name: ${COMPOSE_PROJECT_NAME}-www
+    volumes:
+      - ${DLLOCAL_PATH}/${STORAGE_PATH}/codebase:/var/www/php:cached
+      - ${DLLOCAL_PATH}/${STORAGE_PATH}/docker/local/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ${DLLOCAL_PATH}/${STORAGE_PATH}/persistent/laravel/storage:/var/www/php/storage
+      - ${DLLOCAL_PATH}/${STORAGE_PATH}/persistent/laravel/storage/app/public:/var/www/php/public/storage
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  mysql:
+    container_name: ${COMPOSE_PROJECT_NAME}-mysql
+    extends:
+      file: ${DLLOCAL_PATH}/containers/mysql/latest.yml
+      service: mysql
+    volumes:
+      - ${DLLOCAL_PATH}/${STORAGE_PATH}/persistent/laravel/db/mysql/data:/var/lib/mysql
+    ports:
+      - ${MYSQL_EXPOSED_PORT}:3306
+
+  redis:
+    container_name: ${COMPOSE_PROJECT_NAME}-redis
+    extends:
+      file: ${DLLOCAL_PATH}/containers/redis/5.0.yml
+      service: redis
+    ports:
+      - ${REDIS_EXPOSED_PORT}:6379
+
+networks:
+  proxy:
+    external: true
