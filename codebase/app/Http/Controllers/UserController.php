@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UserResource;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Log;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist as FileDoesNotExistAlias;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig as FileIsTooBigAlias;
 
@@ -18,7 +14,6 @@ class UserController extends Controller
      */
     public function requestLandlord(Request $request)
     {
-        Log::info($request);
 
         if ($request->user()->hasRole('landlord')) {
             return response()->json([
@@ -43,11 +38,11 @@ class UserController extends Controller
 
             return response()->json([
                 'Accepted' => "User is now pending landlord request!"
-            ], 202);
+            ], 201);
         }
 
         return response()->json([
             'Error' => "Make sure u have entered an image!"
-        ], 200);
+        ], 400);
     }
 }
