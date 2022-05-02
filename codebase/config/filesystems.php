@@ -38,8 +38,9 @@ return [
 
         'landlordRequest' => [
             'driver' => 'local',
-            'root' => storage_path('app/landlord-request/images'),
-            'url' => env('APP_URL').'/storage/landlord-request',
+            'root' => storage_path('app/landlord/request/images'),
+            'url' => env('APP_URL').'/storage/landlord/request',
+            'visibility' => 'private'
         ],
 
         'public' => [
