@@ -35,7 +35,6 @@ class UserSeeder extends Seeder
             "ics" => null,
         ]);
         $user1->assignRole('user');
-        $user1->assignRole('pending-landlord');
 
         $user2 = User::factory()->create([
             "name" => "Lukas Vanhoof",

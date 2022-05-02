@@ -15,13 +15,13 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-        $user = User::whereId($this->id)->first();
         return [
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
             'organization' => $this->organization,
-            'roles' => $user->getRoleNames()
+            'roles' => $this->getRoleNames(),
+            'landlordRequestImage' => MediaResource::collection($this->whenLoaded('media'))
         ];
     }
 }

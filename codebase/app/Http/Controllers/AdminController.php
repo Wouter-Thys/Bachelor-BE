@@ -19,6 +19,6 @@ class AdminController extends Controller
     }
     public function usersPendingLandlord(Request $request)
     {
-        return UserResource::collection(User::role('pending-landlord')->get());
+        return UserResource::collection(User::role('pending-landlord')->with('media')->get());
     }
 }
