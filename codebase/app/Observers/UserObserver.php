@@ -25,7 +25,11 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        //
+        if($user->hasRole('pending-landlord') && $user->hasRole('landlord'))
+        {
+            $user->removeRole('pending-landlord');
+            $user->save();
+        }
     }
 
     /**

@@ -36,6 +36,12 @@ return [
             'throw' => false,
         ],
 
+        'landlordRequest' => [
+            'driver' => 'local',
+            'root' => storage_path('app/landlord-request/images'),
+            'url' => env('APP_URL').'/storage/landlord-request',
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

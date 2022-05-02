@@ -16,6 +16,7 @@ class PermissionSeeder extends Seeder
     {
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'user']);
-        Role::create(['name' => 'seller']);
+        Role::create(['name' => 'pending-landlord']);
+        Role::create(['name' => 'landlord']);
     }
 }

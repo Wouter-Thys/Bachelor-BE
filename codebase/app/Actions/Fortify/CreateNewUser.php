@@ -41,7 +41,6 @@ class CreateNewUser implements CreatesNewUsers
         ]);
 
         $user->assignRole('user');
-        ray($user);
         return $user;
     }
 }
