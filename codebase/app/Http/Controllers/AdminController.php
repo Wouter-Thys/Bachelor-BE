@@ -22,6 +22,6 @@ class AdminController extends Controller
     }
     public function userPendingLandlord(User $user)
     {
-        return new UserResource($user->role('pending-landlord')->with('media')->first());
+        return new UserResource($user->load('media'));
     }
 }
