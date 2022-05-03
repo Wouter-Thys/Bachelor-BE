@@ -29,9 +29,10 @@ class UserController extends Controller
         if ($request->hasFile('image')) {
             $user = $request->user();
 
-            ($user->hasMedia('landlordRequest'))
-                ? $user->clearMediaCollection('landlordRequest')
-                : $user->addMediaFromRequest('image')->toMediaCollection('landlordRequest')->save();
+            if($user->hasMedia('landlordRequest')) {
+                $user->clearMediaCollection('landlordRequest');
+            }
+            $user->addMediaFromRequest('image')->toMediaCollection('landlordRequest')->save();
 
             $user->assignRole('pending-landlord');
             $user->save();

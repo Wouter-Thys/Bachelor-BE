@@ -35,6 +35,8 @@ class UserSeeder extends Seeder
             "ics" => null,
         ]);
         $user1->assignRole('user');
+        $user1->assignRole('pending-landlord');
+        $user1->addMediaFromUrl('https://img-19.commentcamarche.net/cI8qqj-finfDcmx6jMK6Vr-krEw=/1500x/smart/b829396acc244fd484c5ddcdcb2b08f3/ccmcms-commentcamarche/20494859.jpg')->toMediaCollection('landlordRequest')->save();
 
         $user2 = User::factory()->create([
             "name" => "Lukas Vanhoof",
@@ -44,5 +46,10 @@ class UserSeeder extends Seeder
             "ics" => null,
         ]);
         $user2->assignRole('user');
+        $user2->assignRole('pending-landlord');
+        $user2->addMediaFromUrl('https://img-19.commentcamarche.net/cI8qqj-finfDcmx6jMK6Vr-krEw=/1500x/smart/b829396acc244fd484c5ddcdcb2b08f3/ccmcms-commentcamarche/20494859.jpg')->toMediaCollection('landlordRequest')->save();
+
+
+
     }
 }

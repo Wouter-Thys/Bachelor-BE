@@ -30,5 +30,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/admin-users', [AdminController::class, 'adminUsers']);
         Route::get('/admin/users-pending-landlord', [AdminController::class, 'usersPendingLandlord']);
         Route::get('/admin/user-pending-landlord/{user}', [AdminController::class, 'userPendingLandlord']);
+        Route::put('/admin/user-pending-landlord/{user}', [AdminController::class, 'updateUserPendingLandlord']);
     });
 });
