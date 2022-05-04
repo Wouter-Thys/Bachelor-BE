@@ -26,13 +26,6 @@ class UpdateLandlordRequest extends FormRequest
             'success'   => false,
             'message'   => 'Validation errors',
             'data'      => $validator->errors()
-        ]));
-    }
-    public function messages()
-    {
-        return [
-            'data.required' => 'Data is required',
-            'data.data' => 'Data has to be a boolean'
-        ];
+        ], 400));
     }
 }
