@@ -30,6 +30,8 @@ class UserSeeder extends Seeder
         $user1 = User::factory()->create([
             "name" => "Wouter Thys",
             "email" => "wouter.thys@outlook.com",
+            "phone_number" => null,
+            "phone_number_verified_at" => null,
             "password" => Hash::make("password"),
             "organization" => "Scouts Beringen-Mijn",
             "ics" => null,
@@ -41,6 +43,7 @@ class UserSeeder extends Seeder
         $user2 = User::factory()->create([
             "name" => "Lukas Vanhoof",
             "email" => "lukas.vanhoof@gmail.be",
+            "email_verified_at" => null,
             "password" => Hash::make("password"),
             "organization" => "Scouts Antwerpen",
             "ics" => null,
