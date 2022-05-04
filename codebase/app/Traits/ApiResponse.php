@@ -2,12 +2,13 @@
 
 namespace App\Traits;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 trait ApiResponse
 {
-    protected function success(array|string|ResourceCollection $data, string $message = null, int $code = 200): JsonResponse
+    protected function success(array|string|ResourceCollection|UserResource $data, string $message = null, int $code = 200): JsonResponse
     {
         return response()->json([
             'status' => 'Success',

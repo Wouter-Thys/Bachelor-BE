@@ -26,7 +26,7 @@ class AdminController extends Controller
     }
     public function userPendingLandlord(User $user)
     {
-        return $this->success(UserResource::collection($user->load('media')), 'Success', 201);
+        return $this->success(new UserResource($user->load('media')), 'Success', 201);
     }
     public function updateUserPendingLandlord(User $user, UpdateLandlordRequest $request)
     {
