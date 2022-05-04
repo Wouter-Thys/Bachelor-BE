@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Api\Admin\PendingLandlordController;
+use App\Http\Controllers\Api\Admin\UsersController as AdminUsersController;
+use App\Http\Controllers\Api\User\RequestLandlordController;
+use App\Http\Controllers\UserController as oldController;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Middleware\IsAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,13 +24,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return new UserResource($request->user());
     });
 
-    Route::post('/request-landlord', [UserController::class, 'requestLandlord']);
-
-    Route::middleware(IsAdmin::class)->group(function () {
-        Route::get('/admin/users', [AdminController::class, 'users']);
-        Route::get('/admin-users', [AdminController::class, 'adminUsers']);
-        Route::get('/admin/users-pending-landlord', [AdminController::class, 'usersPendingLandlord']);
-        Route::get('/admin/user-pending-landlord/{user}', [AdminController::class, 'userPendingLandlord']);
-        Route::put('/admin/user-pending-landlord/{user}', [AdminController::class, 'updateUserPendingLandlord']);
+    Route::group(['middleware' => ["role:user"]], function () {
+        Route::apiResource('request-landlord', RequestLandlordController::class)->parameters(['request-landlord'=>'user']);
+    });
+    Route::group(['middleware' => ["role:admin"],'prefix' => '/admin'], function () {
+        Route::apiResource('users', AdminUsersController::class);
+        Route::apiResource('pending-landlords', PendingLandlordController::class)->parameters(['pending-landlords'=>'user']);
     });
 });

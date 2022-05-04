@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
         $user2->addMediaFromUrl('https://img-19.commentcamarche.net/cI8qqj-finfDcmx6jMK6Vr-krEw=/1500x/smart/b829396acc244fd484c5ddcdcb2b08f3/ccmcms-commentcamarche/20494859.jpg')->toMediaCollection('landlordRequest')->save();
 
 
-        $users = User::factory(10)->create();
+        $users = User::factory(1000)->create();
         foreach ($users as $user){
             $user->assignRole('user');
             $user->assignRole('pending-landlord');

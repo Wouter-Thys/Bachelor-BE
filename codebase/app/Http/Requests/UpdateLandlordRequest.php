@@ -3,27 +3,16 @@
 namespace App\Http\Requests;
 
 use App\Traits\ApiResponse;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use JetBrains\PhpStorm\ArrayShape;
 
 class UpdateLandlordRequest extends FormRequest
 {
     use ApiResponse;
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
+    #[ArrayShape(['data' => "string[]"])] public function rules(): array
     {
         return [
-            'data' => ['required', 'boolean'],
+            'data' => ['required', 'boolean']
         ];
-    }
-
-    public function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException($this->error("Make sure data is a boolean!", 'Validation errors', 400));
     }
 }
