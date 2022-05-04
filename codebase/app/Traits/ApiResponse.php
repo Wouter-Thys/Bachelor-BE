@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Http\Resources\UserResource;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 

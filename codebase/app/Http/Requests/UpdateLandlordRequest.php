@@ -24,6 +24,6 @@ class UpdateLandlordRequest extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException($this->error($validator->errors(), 'Validation errors', 400));
+        throw new HttpResponseException($this->error("Make sure data is a boolean!", 'Validation errors', 400));
     }
 }
