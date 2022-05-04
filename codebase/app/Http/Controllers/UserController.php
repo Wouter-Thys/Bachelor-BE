@@ -1,29 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist as FileDoesNotExistAlias;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig as FileIsTooBigAlias;
 
 class UserController extends Controller
 {
-    /**
-     * @throws FileDoesNotExistAlias
-     * @throws FileIsTooBigAlias
-     */
+    use ApiResponse;
     public function requestLandlord(Request $request)
     {
-
         if ($request->user()->hasRole('landlord')) {
-            return response()->json([
-                'Error' => "User is already landlord!"
-            ], 400);
+            return $this->error($request->user(), 'Role Error: User is already landlord!', 400);
         }
         if ($request->user()->hasRole('pending-landlord')) {
-            return response()->json([
-                'Error' => "User is pending results of becoming landlord!"
-            ], 400);
+            return $this->error($request->user(), 'Error: Admin is reviewing your request!', 400);
         }
 
         if ($request->hasFile('image')) {
@@ -37,13 +27,10 @@ class UserController extends Controller
             $user->assignRole('pending-landlord');
             $user->save();
 
-            return response()->json([
-                'Accepted' => "User is now pending landlord request!"
-            ], 201);
+            return $this->success($request->user(), 'Success', 201);
         }
 
-        return response()->json([
-            'Error' => "Make sure u have entered an image!"
-        ], 400);
+
+        return $this->error($request->user(), 'Error: Something went wrong please try again!', 400);
     }
 }

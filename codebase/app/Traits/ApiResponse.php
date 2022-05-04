@@ -2,48 +2,26 @@
 
 namespace App\Traits;
 
-use Carbon\Carbon;
-
-/*
-|--------------------------------------------------------------------------
-| Api Response Trait
-|--------------------------------------------------------------------------
-|
-| This trait will be used for any response we sent to clients.
-|
-*/
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 trait ApiResponse
 {
-    /**
-     * Return a success JSON response.
-     *
-     * @param  array|string  $data
-     * @param  string  $message
-     * @param  int|null  $code
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function success($data, string $message = null, int $code = 200)
+    protected function success(array|string|ResourceCollection $data, string $message = null, int $code = 200): JsonResponse
     {
         return response()->json([
             'status' => 'Success',
+            'success'   => true,
             'message' => $message,
             'data' => $data
         ], $code);
     }
 
-    /**
-     * Return an error JSON response.
-     *
-     * @param  string  $message
-     * @param  int  $code
-     * @param  array|string|null  $data
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function error(string $message = null, int $code, $data = null)
+    protected function error( array|string|null $data, string $message, int $code): JsonResponse
     {
         return response()->json([
             'status' => 'Error',
+            'success'   => false,
             'message' => $message,
             'data' => $data
         ], $code);

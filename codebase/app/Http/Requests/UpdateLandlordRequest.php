@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests;
 
+use App\Traits\ApiResponse;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdateLandlordRequest extends FormRequest
 {
+    use ApiResponse;
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,10 +24,6 @@ class UpdateLandlordRequest extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Validation errors',
-            'data'      => $validator->errors()
-        ], 400));
+        throw new HttpResponseException($this->error($validator->errors(), 'Validation errors', 400));
     }
 }

@@ -5,25 +5,28 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateLandlordRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    use ApiResponse;
+
     public function users(Request $request)
     {
-        return UserResource::collection(User::role('user')->get());
+        return $this->success(UserResource::collection(User::role('user')->get()), 'Success', 201);
     }
     public function adminUsers(Request $request)
     {
-        return UserResource::collection(User::role('admin')->get());
+        return $this->success(UserResource::collection(User::role('admin')->get()), 'Success', 201);
     }
     public function usersPendingLandlord(Request $request)
     {
-        return UserResource::collection(User::role('pending-landlord')->with('media')->get());
+        return $this->success(UserResource::collection(User::role('pending-landlord')->with('media')->get()), 'Success', 201);
     }
     public function userPendingLandlord(User $user)
     {
-        return new UserResource($user->load('media'));
+        return $this->success(UserResource::collection($user->load('media')), 'Success', 201);
     }
     public function updateUserPendingLandlord(User $user, UpdateLandlordRequest $request)
     {
@@ -37,6 +40,7 @@ class AdminController extends Controller
                 $user->clearMediaCollection('landlordRequest');
             }
         }
-        return 'Success';
+
+        return $this->success($user, 'Success', 201);
     }
 }
