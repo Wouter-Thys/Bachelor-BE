@@ -22,15 +22,29 @@ class RequestLandlordController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        if ($request->user()->hasRole('landlord')) {
+            return $this->error($request->user(), 'Role Error: User is already landlord!', 400);
+        }
+        if ($request->user()->hasRole('pending-landlord')) {
+            return $this->error($request->user(), 'Error: Admin is reviewing your request!', 400);
+        }
+
+        if ($request->hasFile('image')) {
+            if ($request->user()->hasMedia('landlordRequest')) {
+                $request->user()->clearMediaCollection('landlordRequest');
+            }
+            $request->user()->addMediaFromRequest('image')->toMediaCollection('landlordRequest')->save();
+
+            $request->user()->assignRole('pending-landlord');
+            $request->user()->save();
+
+            return UserResource::make($request->user());
+        }
+
+
+        return $this->error($request->user(), 'Error: Something went wrong please try again!', 400);
     }
 
     /**
@@ -46,28 +60,6 @@ class RequestLandlordController extends Controller
 
     public function update(Request $request, User $user)
     {
-        if ($request->user()->id === $user->id) {
-            if ($user->hasRole('landlord')) {
-                return $this->error($request->user(), 'Role Error: User is already landlord!', 400);
-            }
-            if ($user->hasRole('pending-landlord')) {
-                return $this->error($request->user(), 'Error: Admin is reviewing your request!', 400);
-            }
-
-            if ($request->hasFile('image')) {
-                if ($user->hasMedia('landlordRequest')) {
-                    $user->clearMediaCollection('landlordRequest');
-                }
-                $user->addMediaFromRequest('image')->toMediaCollection('landlordRequest')->save();
-
-                $user->assignRole('pending-landlord');
-                $user->save();
-
-                return UserResource::make($user);
-            }
-        }
-
-        return $this->error($user, 'Error: Something went wrong please try again!', 400);
     }
 
     /**
