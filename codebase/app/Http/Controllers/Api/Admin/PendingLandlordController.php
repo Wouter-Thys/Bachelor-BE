@@ -23,7 +23,6 @@ class PendingLandlordController extends Controller
 
     public function show(User $user): JsonResource
     {
-        ray($user);
         return UserResource::make($user->load('media'));
     }
 

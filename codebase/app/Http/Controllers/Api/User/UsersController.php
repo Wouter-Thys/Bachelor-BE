@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\UserResource;
+use App\Models\User;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    use ApiResponse;
+
     /**
      * Display a listing of the resource.
      *
@@ -39,16 +45,13 @@ class UsersController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        if ($user->update($request->validated())) {
+            return UserResource::make($user);
+        }
+
+        return $this->error(UserResource::make($user), 'something went wrong please try again!', 400);
     }
 
     /**

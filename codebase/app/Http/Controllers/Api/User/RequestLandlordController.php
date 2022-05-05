@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RequestLandlordRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Traits\ApiResponse;
@@ -22,7 +23,7 @@ class RequestLandlordController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(RequestLandlordRequest $request)
     {
         if ($request->user()->hasRole('landlord')) {
             return $this->error($request->user(), 'Role Error: User is already landlord!', 400);
