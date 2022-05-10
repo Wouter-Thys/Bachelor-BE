@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Api\Admin\PendingLandlordController;
 use App\Http\Controllers\Api\Admin\UsersController as AdminUsersController;
+use App\Http\Controllers\Api\landlord\ImageController;
+use App\Http\Controllers\Api\landlord\TempImageController;
+use App\Http\Controllers\Api\landlord\TerrainController;
 use App\Http\Controllers\Api\User\RequestLandlordController;
 use App\Http\Controllers\Api\User\UpdateEmailController;
 use App\Http\Controllers\Api\User\UsersController;
@@ -30,6 +33,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             RequestLandlordController::class)->parameters(['request-landlord' => 'user'])->only(['store']);
         Route::apiResource('users', UsersController::class);
         Route::put('update/email', UpdateEmailController::class);
+    });
+    Route::group(['middleware' => ["role:landlord"], 'prefix' => '/landlord'], function () {
+        Route::apiResource('terrain', TerrainController::class);
+        Route::apiResource('terrain/images', ImageController::class);
+        Route::apiResource('terrain/temp-images', TempImageController::class);
     });
     Route::group(['middleware' => ["role:admin"], 'prefix' => '/admin'], function () {
         Route::apiResource('users', AdminUsersController::class);
