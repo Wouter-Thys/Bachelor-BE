@@ -25,9 +25,11 @@ class TempImageController extends Controller
                         PATHINFO_EXTENSION))->toMediaCollection('terrainTempImages')->save();
             }
         }
-        ray($request->user()->getFirstMediaUrl('terrainTempImages'));
 
-        return $request->user()->getMedia('terrainTempImages');
+        $images = collect($request->user()->getMedia('terrainTempImages'))->map(fn($image
+        ) => ['id' => $image->id, 'url' => $image->getUrl()]);
+
+        return $images;
     }
 
     public function show($id)
