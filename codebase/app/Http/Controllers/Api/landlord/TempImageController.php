@@ -42,8 +42,14 @@ class TempImageController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $request->user()->deleteMedia($id);
+        $request->user()->load('media');
+
+        $images = collect($request->user()->getMedia('terrainTempImages'))->map(fn($image
+        ) => ['id' => $image->id, 'url' => $image->getUrl()]);
+        
+        return $images;
     }
 }

@@ -39,7 +39,7 @@ class PendingLandlordController extends Controller
             }
         }
 
-        return new UserResource($user);
+        return UserResource::make($user);
     }
 
     public function destroy($id)
