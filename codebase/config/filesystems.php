@@ -43,6 +43,14 @@ return [
             'visibility' => 'private'
         ],
 
+        'terrainTempImages' => [
+            'driver' => 'local',
+            'root' => storage_path('app/terrain/temp-images'),
+            'url' => env('APP_URL').'/storage/temp-images',
+            'visibility' => 'public'
+        ],
+
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
@@ -77,7 +85,7 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        public_path('storage/temp-images') => storage_path('app/terrain/temp-images'),
     ],
 
 ];

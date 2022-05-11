@@ -103,4 +103,11 @@ class User extends Authenticatable implements HasMedia
     {
         $this->attributes['password'] = bcrypt($password);
     }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('landlordRequest')->useDisk('landlordRequest');
+        $this->addMediaCollection('terrainTempImages')->useDisk('terrainTempImages');
+    }
+
 }

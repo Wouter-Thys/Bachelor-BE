@@ -8,8 +8,6 @@ class TempImageRequest extends FormRequest
 {
     public function rules(): array
     {
-        ray($this);
-
         return [
             'images.*' => ['image', 'mimes:png,jpeg,jpg'],
         ];
