@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Admin\PendingLandlordController;
 use App\Http\Controllers\Api\Admin\UsersController as AdminUsersController;
+use App\Http\Controllers\Api\Guest\TerrainController as GuestTerrainController;
 use App\Http\Controllers\Api\landlord\ImageController;
 use App\Http\Controllers\Api\landlord\TempImageController;
 use App\Http\Controllers\Api\landlord\TerrainController;
@@ -22,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::apiResource('terrain', GuestTerrainController::class);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/me', function (Request $request) {

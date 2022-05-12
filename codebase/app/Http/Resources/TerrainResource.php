@@ -14,9 +14,6 @@ class TerrainResource extends JsonResource
      */
     public function toArray($request)
     {
-        ray($request);
-        ray($this);
-
         return [
             "name" => $this->name,
             "description" => $this->description,
@@ -39,7 +36,8 @@ class TerrainResource extends JsonResource
             "remote_rating" => $this->remote_rating,
             "wood_rating" => $this->wood_rating,
             "playground_rating" => $this->playground_rating,
-            "images" => ImageResource::collection($this->whenoaded('media'))
+            "images" => ImageResource::collection($this->getMedia('terrainImages')),
+            "owner" => UserResource::make($request->user()),
         ];
     }
 }
