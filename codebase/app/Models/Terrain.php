@@ -1,0 +1,115 @@
+<?php
+
+namespace App\Models;
+
+use Database\Factories\TerrainFactory;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+
+/**
+ * App\Models\Terrain
+ *
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $name
+ * @property string|null $description
+ * @property string $street
+ * @property string $streetNumber
+ * @property string $postcode
+ * @property string $province
+ * @property string $locality
+ * @property int $water
+ * @property int $electricity
+ * @property int $threePhaseElectricity
+ * @property int $sanitaryBlock
+ * @property int $showers
+ * @property int $toilets
+ * @property int $sinks
+ * @property int $max_people
+ * @property int $hectare
+ * @property int $supermarket_rating
+ * @property int $activities_rating
+ * @property int $remote_rating
+ * @property int $wood_rating
+ * @property int $playground_rating
+ * @property-read \App\Models\User|null $user
+ * @method static TerrainFactory factory(...$parameters)
+ * @method static Builder|Terrain newModelQuery()
+ * @method static Builder|Terrain newQuery()
+ * @method static Builder|Terrain query()
+ * @method static Builder|Terrain whereActivitiesRating($value)
+ * @method static Builder|Terrain whereCreatedAt($value)
+ * @method static Builder|Terrain whereDescription($value)
+ * @method static Builder|Terrain whereElectricity($value)
+ * @method static Builder|Terrain whereHectare($value)
+ * @method static Builder|Terrain whereId($value)
+ * @method static Builder|Terrain whereLocality($value)
+ * @method static Builder|Terrain whereMaxPeople($value)
+ * @method static Builder|Terrain whereName($value)
+ * @method static Builder|Terrain wherePlaygroundRating($value)
+ * @method static Builder|Terrain wherePostcode($value)
+ * @method static Builder|Terrain whereProvince($value)
+ * @method static Builder|Terrain whereRemoteRating($value)
+ * @method static Builder|Terrain whereSanitaryBlock($value)
+ * @method static Builder|Terrain whereShowers($value)
+ * @method static Builder|Terrain whereSinks($value)
+ * @method static Builder|Terrain whereStreet($value)
+ * @method static Builder|Terrain whereStreetNumber($value)
+ * @method static Builder|Terrain whereSupermarketRating($value)
+ * @method static Builder|Terrain whereThreePhaseElectricity($value)
+ * @method static Builder|Terrain whereToilets($value)
+ * @method static Builder|Terrain whereUpdatedAt($value)
+ * @method static Builder|Terrain whereWater($value)
+ * @method static Builder|Terrain whereWoodRating($value)
+ * @mixin \Eloquent
+ * @property int $user_id
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
+ * @property-read int|null $media_count
+ * @method static Builder|Terrain whereUserId($value)
+ */
+class Terrain extends Model implements HasMedia
+{
+    use HasFactory, InteractsWithMedia;
+
+    protected $fillable = [
+        "user_id",
+        "name",
+        "description",
+        "street",
+        "streetNumber",
+        "postcode",
+        "province",
+        "locality",
+        "water",
+        "electricity",
+        "threePhaseElectricity",
+        "sanitaryBlock",
+        "showers",
+        "toilets",
+        "sinks",
+        "max_people",
+        "hectare",
+        "supermarket_rating",
+        "activities_rating",
+        "remote_rating",
+        "wood_rating",
+        "playground_rating",
+    ];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('terrainImages')->useDisk('terrainImages');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+}

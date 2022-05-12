@@ -16,17 +16,15 @@ class TempImageController extends Controller
 
     public function store(TempImageRequest $request)
     {
+        $request->user()->clearMediaCollection('terrainTempImages');
+
         if ($request->hasFile("images")) {
-            if ($request->user()->hasMedia('terrainTempImages')) {
-                $request->user()->clearMediaCollection('terrainTempImages');
-            }
             foreach ($request->validated()["images"] as $image) {
                 $request->user()->addMedia($image)->setFileName('temp-'.Str::uuid()->toString().".".pathinfo($image->getClientOriginalName(),
                         PATHINFO_EXTENSION))->toMediaCollection('terrainTempImages')->save();
             }
         }
-
-        $images = collect($request->user()->getMedia('terrainTempImages'))->map(fn($image
+        $images = $request->user()->getMedia('terrainTempImages')->map(fn($image
         ) => ['id' => $image->id, 'url' => $image->getUrl()]);
 
         return $images;
@@ -49,7 +47,7 @@ class TempImageController extends Controller
 
         $images = collect($request->user()->getMedia('terrainTempImages'))->map(fn($image
         ) => ['id' => $image->id, 'url' => $image->getUrl()]);
-        
+
         return $images;
     }
 }

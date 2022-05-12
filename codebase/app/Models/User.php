@@ -5,6 +5,7 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -60,6 +61,14 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereOrganization($value)
  * @method static Builder|User whereTwoFactorRecoveryCodes($value)
  * @method static Builder|User whereTwoFactorSecret($value)
+ * @property string|null $phone_number
+ * @property string|null $phone_number_verified_at
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
+ * @property-read int|null $media_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Terrain[] $terrains
+ * @property-read int|null $terrains_count
+ * @method static Builder|User wherePhoneNumber($value)
+ * @method static Builder|User wherePhoneNumberVerifiedAt($value)
  */
 class User extends Authenticatable implements HasMedia
 {
@@ -109,5 +118,11 @@ class User extends Authenticatable implements HasMedia
         $this->addMediaCollection('landlordRequest')->useDisk('landlordRequest');
         $this->addMediaCollection('terrainTempImages')->useDisk('terrainTempImages');
     }
+
+    public function terrains(): HasMany
+    {
+        return $this->hasMany(Terrain::class);
+    }
+
 
 }
