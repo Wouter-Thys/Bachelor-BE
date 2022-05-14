@@ -16,8 +16,30 @@ class TerrainFactory extends Factory
      */
     public function definition()
     {
+        $yesNo = $this->faker->boolean();
+
         return [
-            //
+            "name" => $this->faker->name(),
+            "description" => $this->faker->text(50),
+            "street" => $this->faker->streetName(),
+            "streetNumber" => $this->faker->numberBetween(1, 150),
+            "postcode" => $this->faker->numberBetween(2000, 4000),
+            "province" => $this->faker->word(),
+            "locality" => $this->faker->word(),
+            "water" => $this->faker->boolean(),
+            "electricity" => $this->faker->boolean(),
+            "threePhaseElectricity" => $this->faker->boolean(),
+            "sanitaryBlock" => $yesNo,
+            "showers" => $yesNo,
+            "toilets" => $yesNo,
+            "sinks" => $yesNo,
+            "max_people" => $this->faker->numberBetween(100, 1500),
+            "hectare" => $this->faker->numberBetween(1, 20),
+            "supermarket_rating" => $this->faker->numberBetween(1, 5),
+            "activities_rating" => $this->faker->numberBetween(1, 5),
+            "remote_rating" => $this->faker->numberBetween(1, 5),
+            "wood_rating" => $this->faker->numberBetween(1, 5),
+            "playground_rating" => $this->faker->numberBetween(1, 5),
         ];
     }
 }

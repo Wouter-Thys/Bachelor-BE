@@ -14,11 +14,11 @@ class ImageResource extends JsonResource
      */
     public function toArray($request)
     {
-        ray($this);
-
         return [
             'id' => $this->id,
             'url' => $this->resource->getUrl(),
+            'thumbUrl' => $this->resource->getUrl('thumb'),
+            'croppedUrl' => $this->resource->getUrl('crop'),
         ];
     }
 }

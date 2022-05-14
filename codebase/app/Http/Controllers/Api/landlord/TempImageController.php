@@ -20,7 +20,7 @@ class TempImageController extends Controller
 
         if ($request->hasFile("images")) {
             foreach ($request->validated()["images"] as $image) {
-                $request->user()->addMedia($image)->setFileName('temp-'.Str::uuid()->toString().".".pathinfo($image->getClientOriginalName(),
+                $request->user()->addMedia($image)->setFileName(Str::uuid()->toString().".".pathinfo($image->getClientOriginalName(),
                         PATHINFO_EXTENSION))->toMediaCollection('terrainTempImages')->save();
             }
         }
