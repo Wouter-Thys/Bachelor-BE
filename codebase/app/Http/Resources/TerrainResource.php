@@ -38,7 +38,7 @@ class TerrainResource extends JsonResource
             "wood_rating" => $this->wood_rating,
             "playground_rating" => $this->playground_rating,
             "images" => ImageResource::collection($this->getMedia('terrainImages')),
-            "owner" => UserResource::make($request->user()),
+            "owner" => UserResource::make($this->user),
         ];
     }
 }
