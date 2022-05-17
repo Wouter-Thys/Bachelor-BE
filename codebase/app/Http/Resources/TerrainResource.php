@@ -23,6 +23,8 @@ class TerrainResource extends JsonResource
             "postcode" => $this->postcode,
             "province" => $this->province,
             "locality" => $this->locality,
+            "latitude" => $this->latitude,
+            "longitude" => $this->longitude,
             "water" => $this->water,
             "electricity" => $this->electricity,
             "threePhaseElectricity" => $this->threePhaseElectricity,

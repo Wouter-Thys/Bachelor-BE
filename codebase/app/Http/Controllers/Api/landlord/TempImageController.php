@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\landlord;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TempImageRequest;
+use App\Http\Resources\ImageResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -27,7 +28,7 @@ class TempImageController extends Controller
         $images = $request->user()->getMedia('terrainTempImages')->map(fn($image
         ) => ['id' => $image->id, 'url' => $image->getUrl()]);
 
-        return $images;
+        return ImageResource::collection($request->user()->getMedia('terrainTempImages'));
     }
 
     public function show($id)

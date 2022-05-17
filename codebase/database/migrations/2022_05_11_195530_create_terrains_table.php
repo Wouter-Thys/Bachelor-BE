@@ -23,6 +23,8 @@ return new class extends Migration {
             $table->string("postcode");
             $table->string("province");
             $table->string("locality");
+            $table->double("latitude")->nullable();
+            $table->double("longitude")->nullable();
             $table->boolean("water")->default(false);
             $table->boolean("electricity")->default(false);
             $table->boolean("threePhaseElectricity")->default(false);

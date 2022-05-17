@@ -72,6 +72,10 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
  * @property-read int|null $media_count
  * @method static Builder|Terrain whereUserId($value)
+ * @property float|null $latitude
+ * @property float|null $longitude
+ * @method static Builder|Terrain whereLatitude($value)
+ * @method static Builder|Terrain whereLongitude($value)
  */
 class Terrain extends Model implements HasMedia
 {
@@ -86,6 +90,8 @@ class Terrain extends Model implements HasMedia
         "postcode",
         "province",
         "locality",
+        "latitude",
+        "longitude",
         "water",
         "electricity",
         "threePhaseElectricity",
@@ -109,11 +115,6 @@ class Terrain extends Model implements HasMedia
 
     public function registerMediaConversions(Media $media = null): void
     {
-        $this->addMediaConversion('thumb')
-            ->width(368)
-            ->height(232)
-            ->sharpen(10);
-
         $this->addMediaConversion('crop')
             ->crop('crop-center', 200, 200);
     }

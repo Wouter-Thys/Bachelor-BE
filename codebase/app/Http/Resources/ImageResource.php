@@ -17,7 +17,6 @@ class ImageResource extends JsonResource
         return [
             'id' => $this->id,
             'url' => $this->resource->getUrl(),
-            'thumbUrl' => $this->resource->getUrl('thumb'),
             'croppedUrl' => $this->resource->getUrl('crop'),
         ];
     }

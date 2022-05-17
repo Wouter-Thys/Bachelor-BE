@@ -1,0 +1,72 @@
+[
+    {
+        "street": "Beekstuk",
+        "streetNumber": 10,
+        "city": "De Pinte",
+        "province": "Oost-Vlaanderen",
+        "postalcode": 9840
+    },
+    {
+        "street": "Oude Mechelsebaan",
+        "streetNumber": 398,
+        "city": "Aarschot",
+        "province": "Vlaams Brabant",
+        "postalcode": 3201
+    },
+    {
+        "street": "Beverdonk",
+        "streetNumber": 1,
+        "city": "Retie",
+        "province": "Antwerpen",
+        "postalcode": 2470
+    },
+    {
+        "street": "Schanker",
+        "streetNumber": 70,
+        "city": "Essen",
+        "province": "Antwerp",
+        "postalcode": 2910
+    },
+    {
+        "street": "Brugsevaart",
+        "streetNumber": 50,
+        "city": "Nieuwpoort",
+        "province": "West-Vlaanderen",
+        "postalcode": 8620
+    },
+    {
+        "street": "Route de rettigny",
+        "streetNumber": 1,
+        "city": "Cherain",
+        "province": "Luxembourg",
+        "postalcode": 6673
+    },
+    {
+        "street": "Chemin à Cailloux",
+        "streetNumber": 1,
+        "city": "Meslin-l'Evêque",
+        "province": "Hainaut",
+        "postalcode": 7822
+    },
+    {
+        "street": "Chemin de Felignies",
+        "streetNumber": 1,
+        "city": "Soignies",
+        "province": "Hainaut",
+        "postalcode": 7063
+    },
+    {
+        "street": "Rue du Sartau",
+        "streetNumber": 4,
+        "city": "Dion-le-Val",
+        "province": "Brabant Wallon",
+        "postalcode": 1325
+    },
+    {
+        "street": "Rue Pierre du Gayet",
+        "streetNumber": 24,
+        "city": "Saint-Ode",
+        "province": "Luxembourg",
+        "postalcode": 6680
+    }
+]

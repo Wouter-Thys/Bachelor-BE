@@ -3,21 +3,32 @@
 namespace Database\Seeders;
 
 use App\Models\Terrain;
+use File;
 use Illuminate\Database\Seeder;
 
 class TerrainSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
-     *
-     * @return void
+     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileCannotBeAdded
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist
+     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig
      */
     public function run()
     {
-        $terrains = Terrain::factory(10)->create([
-            "user_id" => 1,
-        ]);
-        foreach ($terrains as $terrain) {
+        $json = File::get("database/data/addresses.json");
+        $addresses = json_decode($json);
+
+        foreach ($addresses as $key => $value) {
+            $terrain = Terrain::factory()->create([
+                "user_id" => 1,
+                "street" => $value->street,
+                "streetNumber" => $value->streetNumber,
+                "postcode" => $value->postalcode,
+                "province" => $value->province,
+                "locality" => $value->city,
+            ]);
+
             $terrain->addMediaFromUrl('https://www.terrain-construction.com/content/wp-content/uploads/2019/03/niveler-terrain-min-e1553698896855.jpg')->toMediaCollection('terrainImages')->save();
             $terrain->addMediaFromUrl('https://www.blavier.be/layout/uploads/2020/06/Blog-terrains.jpg')->toMediaCollection('terrainImages')->save();
             $terrain->addMediaFromUrl('https://www.ourendangeredworld.com/wp-content/uploads/2020/12/open-field-terrain.jpg.webp')->toMediaCollection('terrainImages')->save();
