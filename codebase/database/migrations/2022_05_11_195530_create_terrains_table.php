@@ -23,8 +23,8 @@ return new class extends Migration {
             $table->string("postcode");
             $table->string("province");
             $table->string("locality");
-            $table->double("latitude")->nullable();
-            $table->double("longitude")->nullable();
+            $table->float("latitude")->nullable();
+            $table->float("longitude")->nullable();
             $table->boolean("water")->default(false);
             $table->boolean("electricity")->default(false);
             $table->boolean("threePhaseElectricity")->default(false);
@@ -33,7 +33,7 @@ return new class extends Migration {
             $table->boolean("toilets")->default(false);
             $table->boolean("sinks")->default(false);
             $table->integer("max_people")->default(0);
-            $table->integer("hectare")->default(0);
+            $table->float("hectare")->default(0);
             $table->integer("supermarket_rating")->default(1);
             $table->integer("activities_rating")->default(1);
             $table->integer("remote_rating")->default(1);
