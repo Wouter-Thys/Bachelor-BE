@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api\landlord;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DeleteTerrainRequest;
 use App\Http\Requests\StoreTerrainRequest;
+use App\Http\Requests\UpdateTerrainRequest;
 use App\Http\Resources\TerrainResource;
 use App\Models\Terrain;
+use App\Services\ImageService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
@@ -21,11 +24,8 @@ class TerrainController extends Controller
     public function store(StoreTerrainRequest $request)
     {
         $terrain = Terrain::create(array_merge($request->validated(), ["user_id" => $request->user()->id]));
-        $tempMedia = $request->user()->getMedia('terrainTempImages');
-        foreach ($request->validated()['images'] as $image) {
-            $mediaItem = $tempMedia->where('id', $image['id'])->first();
-            $mediaItem->move($terrain, 'terrainImages');
-        }
+        ImageService::TempImageToTerrainImage($request->user()->getMedia('terrainTempImages'),
+            $request->validated()['images'], $terrain);
 
         return $terrain->id;
     }
@@ -39,13 +39,21 @@ class TerrainController extends Controller
         return $this->error($request->user(), 'something went wrong try again!', 400);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateTerrainRequest $request, Terrain $terrain)
     {
-        //
+        $terrain->update($request->validated());
+        ImageService::TempImageToTerrainImage($request->user()->getMedia('terrainTempImages'),
+            $request->validated()['newImages'], $terrain);
+        foreach ($request->validated()['deleteImages'] as $id) {
+            $terrain->deleteMedia($id);
+        }
+        $terrain->load('media');
+
+        return TerrainResource::make($terrain);
     }
 
-    public function destroy($id)
+    public function destroy(DeleteTerrainRequest $request, Terrain $terrain)
     {
-        //
+        $terrain->delete();
     }
 }
