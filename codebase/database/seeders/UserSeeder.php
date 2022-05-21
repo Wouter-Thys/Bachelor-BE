@@ -7,13 +7,10 @@ use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
+        $imageUser = 'https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-674010.jpg&fm=jpg';
+
         $adminUser = User::factory()->create([
             "name" => "Admin",
             "email" => "admin@admin.be",
@@ -36,7 +33,7 @@ class UserSeeder extends Seeder
         ]);
         $user1->assignRole('user');
         $user1->assignRole('pending-landlord');
-        $user1->addMediaFromUrl('https://img-19.commentcamarche.net/cI8qqj-finfDcmx6jMK6Vr-krEw=/1500x/smart/b829396acc244fd484c5ddcdcb2b08f3/ccmcms-commentcamarche/20494859.jpg')->toMediaCollection('landlordRequest')->save();
+        $user1->addMediaFromUrl($imageUser)->toMediaCollection('landlordRequest')->save();
 
         $user2 = User::factory()->create([
             "name" => "Lukas Vanhoof",
@@ -48,14 +45,14 @@ class UserSeeder extends Seeder
         ]);
         $user2->assignRole('user');
         $user2->assignRole('pending-landlord');
-        $user2->addMediaFromUrl('https://img-19.commentcamarche.net/cI8qqj-finfDcmx6jMK6Vr-krEw=/1500x/smart/b829396acc244fd484c5ddcdcb2b08f3/ccmcms-commentcamarche/20494859.jpg')->toMediaCollection('landlordRequest')->save();
+        $user2->addMediaFromUrl($imageUser)->toMediaCollection('landlordRequest')->save();
 
 
         $users = User::factory(10)->create();
         foreach ($users as $user) {
             $user->assignRole('user');
             $user->assignRole('pending-landlord');
-            $user->addMediaFromUrl('https://img-19.commentcamarche.net/cI8qqj-finfDcmx6jMK6Vr-krEw=/1500x/smart/b829396acc244fd484c5ddcdcb2b08f3/ccmcms-commentcamarche/20494859.jpg')->toMediaCollection('landlordRequest')->save();
+            $user->addMediaFromUrl($imageUser)->toMediaCollection('landlordRequest')->save();
         }
     }
 }
