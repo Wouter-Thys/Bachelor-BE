@@ -36,7 +36,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property int $supermarket_rating
  * @property int $activities_rating
  * @property int $remote_rating
- * @property int $wood_rating
+ * @property int $bakery_rating
  * @property int $playground_rating
  * @property-read \App\Models\User|null $user
  * @method static TerrainFactory factory(...$parameters)
@@ -104,7 +104,7 @@ class Terrain extends Model implements HasMedia
         "supermarket_rating",
         "activities_rating",
         "remote_rating",
-        "wood_rating",
+        "bakery_rating",
         "playground_rating",
     ];
 

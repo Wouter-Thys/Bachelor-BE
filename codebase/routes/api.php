@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Admin\PendingLandlordController;
 use App\Http\Controllers\Api\Admin\UsersController as AdminUsersController;
+use App\Http\Controllers\Api\Guest\SearchTerrainController;
 use App\Http\Controllers\Api\Guest\TerrainController as GuestTerrainController;
 use App\Http\Controllers\Api\landlord\ImageController;
 use App\Http\Controllers\Api\landlord\TempImageController;
@@ -25,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('terrain', GuestTerrainController::class);
+Route::post('terrain/search', SearchTerrainController::class);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/me', function (Request $request) {

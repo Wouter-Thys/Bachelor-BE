@@ -44,7 +44,7 @@ class UpdateTerrainRequest extends FormRequest
             "supermarket_rating" => ["required", "integer", "max:5", "min:1"],
             "activities_rating" => ["required", "integer", "max:5", "min:1"],
             "remote_rating" => ["required", "integer", "max:5", "min:1"],
-            "wood_rating" => ["required", "integer", "max:5", "min:1"],
+            "bakery_rating" => ["required", "integer", "max:5", "min:1"],
             "playground_rating" => ["required", "integer", "max:5", "min:1"],
             "images" => ["required", "array"],
             "newImages" => ["array"],

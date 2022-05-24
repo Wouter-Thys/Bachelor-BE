@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Terrain;
 use App\Services\AddressService;
+use App\Services\GoogleService;
 use Http;
 
 class TerrainObserver
@@ -22,6 +23,7 @@ class TerrainObserver
             $terrain->latitude = $result['results'][0]['geometry']['location']['lat'];
             $terrain->longitude = $result['results'][0]['geometry']['location']['lng'];
         }
+        GoogleService::nearBySearch($terrain);
     }
 
     /**

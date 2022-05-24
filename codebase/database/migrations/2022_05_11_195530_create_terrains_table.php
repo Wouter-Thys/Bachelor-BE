@@ -37,7 +37,7 @@ return new class extends Migration {
             $table->integer("supermarket_rating")->default(1);
             $table->integer("activities_rating")->default(1);
             $table->integer("remote_rating")->default(1);
-            $table->integer("wood_rating")->default(1);
+            $table->integer("bakery_rating")->default(1);
             $table->integer("playground_rating")->default(1);
         });
     }
