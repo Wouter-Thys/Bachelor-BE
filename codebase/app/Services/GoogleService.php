@@ -12,23 +12,28 @@ class GoogleService
         switch ($activities) {
             case('supermarket'):
             case('bakery'):
-                $radius = 10000;
+                $radius = 5000;
                 $growRadius = 5000;
 
                 return self::getRating($terrain, $radius, $growRadius, $activities);
 
             case('activities'):
-                $radius = 2000;
-                $growRadius = 2000;
+                $radius = 500;
+                $growRadius = 500;
 
                 return self::getRating($terrain, $radius, $growRadius, $activities);
 
             case('remote'):
-            case('firstAid'):
-                $radius = 5000;
-                $growRadius = 5000;
+                $radius = 1000;
+                $growRadius = 1000;
 
                 return self::getRating($terrain, $radius, $growRadius, $activities);
+
+            case('firstAid'):
+                $radius = 4000;
+                $shrinkRadius = 1000;
+
+                return self::getRating($terrain, $radius, $shrinkRadius, $activities);
 
             default:
                 return 'Something went wrong.';
@@ -37,6 +42,19 @@ class GoogleService
 
     public static function getRating(Terrain $terrain, int $radius, int $growRadius, string $activities): int
     {
+        if ($activities === 'remote') {
+            for ($i = 5; $i >= 1; $i--) {
+                $rating = $i;
+                $result = self::nearBySearch($terrain, $radius, $activities);
+                if (!empty($result['results'])) {
+                    break;
+                }
+                $radius = $radius - $growRadius;
+            }
+
+            return $rating;
+        }
+
         for ($i = 5; $i >= 1; $i--) {
             $rating = $i;
             $result = self::nearBySearch($terrain, $radius, $activities);
