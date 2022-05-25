@@ -24,16 +24,16 @@ class GoogleService
                 return self::getRating($terrain, $radius, $growRadius, $activities);
 
             case('remote'):
+                $radius = 5000;
+                $shrinkRadius = 1000;
+
+                return self::getRating($terrain, $radius, $shrinkRadius, $activities);
+
+            case('firstAid'):
                 $radius = 1000;
                 $growRadius = 1000;
 
                 return self::getRating($terrain, $radius, $growRadius, $activities);
-
-            case('firstAid'):
-                $radius = 4000;
-                $shrinkRadius = 1000;
-
-                return self::getRating($terrain, $radius, $shrinkRadius, $activities);
 
             default:
                 return 'Something went wrong.';
@@ -46,7 +46,7 @@ class GoogleService
             for ($i = 5; $i >= 1; $i--) {
                 $rating = $i;
                 $result = self::nearBySearch($terrain, $radius, $activities);
-                if (!empty($result['results'])) {
+                if (empty($result['results'])) {
                     break;
                 }
                 $radius = $radius - $growRadius;
@@ -75,7 +75,7 @@ class GoogleService
             'bakery' => HTTP::post('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='.$terrain->latitude.','.$terrain->longitude.'&radius='.$radius.'&type=bakery&key='.config('api-env.googleApi'))->json(),
             'remote' => HTTP::post('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='.$terrain->latitude.','.$terrain->longitude.'&radius='.$radius.'&type=city_hall&key='.config('api-env.googleApi'))->json(),
             'firstAid' => HTTP::post('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='.$terrain->latitude.','.$terrain->longitude.'&radius='.$radius.'&type=doctor&key='.config('api-env.googleApi'))->json(),
-            default => 'Something went wrong.',
+            default => HTTP::post('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='.$terrain->latitude.','.$terrain->longitude.'&radius='.$radius.'&keyword='.$activities.'&key='.config('api-env.googleApi'))->json(),
         };
     }
 }

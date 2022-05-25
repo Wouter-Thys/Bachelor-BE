@@ -76,6 +76,17 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property float|null $longitude
  * @method static Builder|Terrain whereLatitude($value)
  * @method static Builder|Terrain whereLongitude($value)
+ * @property int $google_supermarket_rating
+ * @property int $google_activities_rating
+ * @property int $google_remote_rating
+ * @property int $google_bakery_rating
+ * @property int $google_firstAid_rating
+ * @method static Builder|Terrain whereBakeryRating($value)
+ * @method static Builder|Terrain whereGoogleActivitiesRating($value)
+ * @method static Builder|Terrain whereGoogleBakeryRating($value)
+ * @method static Builder|Terrain whereGoogleFirstAidRating($value)
+ * @method static Builder|Terrain whereGoogleRemoteRating($value)
+ * @method static Builder|Terrain whereGoogleSupermarketRating($value)
  */
 class Terrain extends Model implements HasMedia
 {
