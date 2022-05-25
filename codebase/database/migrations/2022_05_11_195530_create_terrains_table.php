@@ -38,7 +38,12 @@ return new class extends Migration {
             $table->integer("activities_rating")->default(1);
             $table->integer("remote_rating")->default(1);
             $table->integer("bakery_rating")->default(1);
-            $table->integer("playground_rating")->default(1);
+            $table->integer("firstAid_rating")->default(1);
+            $table->integer("google_supermarket_rating")->default(1);
+            $table->integer("google_activities_rating")->default(1);
+            $table->integer("google_remote_rating")->default(1);
+            $table->integer("google_bakery_rating")->default(1);
+            $table->integer("google_firstAid_rating")->default(1);
         });
     }
 

@@ -23,7 +23,11 @@ class TerrainObserver
             $terrain->latitude = $result['results'][0]['geometry']['location']['lat'];
             $terrain->longitude = $result['results'][0]['geometry']['location']['lng'];
         }
-        GoogleService::nearBySearch($terrain);
+        $terrain->google_supermarket_rating = GoogleService::GoogleRating($terrain, 'supermarket');
+        $terrain->google_activities_rating = GoogleService::GoogleRating($terrain, 'activities');
+        $terrain->google_remote_rating = GoogleService::GoogleRating($terrain, 'remote');
+        $terrain->google_bakery_rating = GoogleService::GoogleRating($terrain, 'bakery');
+        $terrain->google_firstAid_rating = GoogleService::GoogleRating($terrain, 'firstAid');
     }
 
     /**

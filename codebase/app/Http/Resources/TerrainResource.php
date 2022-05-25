@@ -38,7 +38,12 @@ class TerrainResource extends JsonResource
             "activities_rating" => $this->activities_rating,
             "remote_rating" => $this->remote_rating,
             "bakery_rating" => $this->bakery_rating,
-            "playground_rating" => $this->playground_rating,
+            "firstAid_rating" => $this->firstAid_rating,
+            "google_supermarket_rating" => $this->google_supermarket_rating,
+            "google_activities_rating" => $this->google_activities_rating,
+            "google_remote_rating" => $this->google_remote_rating,
+            "google_bakery_rating" => $this->google_bakery_rating,
+            "google_firstAid_rating" => $this->google_firstAid_rating,
             "images" => ImageResource::collection($this->getMedia('terrainImages')),
             "owner" => UserResource::make($this->user),
         ];

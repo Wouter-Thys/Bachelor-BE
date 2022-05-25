@@ -37,7 +37,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property int $activities_rating
  * @property int $remote_rating
  * @property int $bakery_rating
- * @property int $playground_rating
+ * @property int $firstAid_rating
  * @property-read \App\Models\User|null $user
  * @method static TerrainFactory factory(...$parameters)
  * @method static Builder|Terrain newModelQuery()
@@ -52,7 +52,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static Builder|Terrain whereLocality($value)
  * @method static Builder|Terrain whereMaxPeople($value)
  * @method static Builder|Terrain whereName($value)
- * @method static Builder|Terrain wherePlaygroundRating($value)
+ * @method static Builder|Terrain whereFirstAidRating($value)
  * @method static Builder|Terrain wherePostcode($value)
  * @method static Builder|Terrain whereProvince($value)
  * @method static Builder|Terrain whereRemoteRating($value)
@@ -105,7 +105,12 @@ class Terrain extends Model implements HasMedia
         "activities_rating",
         "remote_rating",
         "bakery_rating",
-        "playground_rating",
+        "firstAid_rating",
+        "google_supermarket_rating",
+        "google_activities_rating",
+        "google_remote_rating",
+        "google_bakery_rating",
+        "google_firstAid_rating",
     ];
 
     public function registerMediaCollections(): void

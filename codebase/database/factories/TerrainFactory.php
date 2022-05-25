@@ -39,7 +39,7 @@ class TerrainFactory extends Factory
             "activities_rating" => $this->faker->numberBetween(1, 5),
             "remote_rating" => $this->faker->numberBetween(1, 5),
             "bakery_rating" => $this->faker->numberBetween(1, 5),
-            "playground_rating" => $this->faker->numberBetween(1, 5),
+            "firstAid_rating" => $this->faker->numberBetween(1, 5),
         ];
     }
 }

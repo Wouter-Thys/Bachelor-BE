@@ -2,71 +2,71 @@
     {
         "street": "Beekstuk",
         "streetNumber": 10,
-        "city": "De Pinte",
+        "locality": "De Pinte",
         "province": "Oost-Vlaanderen",
-        "postalcode": 9840
+        "postcode": 9840
     },
     {
         "street": "Oude Mechelsebaan",
         "streetNumber": 398,
-        "city": "Aarschot",
+        "locality": "Aarschot",
         "province": "Vlaams Brabant",
-        "postalcode": 3201
+        "postcode": 3201
     },
     {
         "street": "Beverdonk",
         "streetNumber": 1,
-        "city": "Retie",
+        "locality": "Retie",
         "province": "Antwerpen",
-        "postalcode": 2470
+        "postcode": 2470
     },
     {
         "street": "Schanker",
         "streetNumber": 70,
-        "city": "Essen",
+        "locality": "Essen",
         "province": "Antwerp",
-        "postalcode": 2910
+        "postcode": 2910
     },
     {
         "street": "Brugsevaart",
         "streetNumber": 50,
-        "city": "Nieuwpoort",
+        "locality": "Nieuwpoort",
         "province": "West-Vlaanderen",
-        "postalcode": 8620
+        "postcode": 8620
     },
     {
         "street": "Route de rettigny",
         "streetNumber": 1,
-        "city": "Cherain",
+        "locality": "Cherain",
         "province": "Luxembourg",
-        "postalcode": 6673
+        "postcode": 6673
     },
     {
         "street": "Chemin à Cailloux",
         "streetNumber": 1,
-        "city": "Meslin-l'Evêque",
+        "locality": "Meslin-l'Evêque",
         "province": "Hainaut",
-        "postalcode": 7822
+        "postcode": 7822
     },
     {
         "street": "Chemin de Felignies",
         "streetNumber": 1,
-        "city": "Soignies",
+        "locality": "Soignies",
         "province": "Hainaut",
-        "postalcode": 7063
+        "postcode": 7063
     },
     {
         "street": "Rue du Sartau",
         "streetNumber": 4,
-        "city": "Dion-le-Val",
+        "locality": "Dion-le-Val",
         "province": "Brabant Wallon",
-        "postalcode": 1325
+        "postcode": 1325
     },
     {
         "street": "Rue Pierre du Gayet",
         "streetNumber": 24,
-        "city": "Saint-Ode",
+        "locality": "Saint-Ode",
         "province": "Luxembourg",
-        "postalcode": 6680
+        "postcode": 6680
     }
 ]

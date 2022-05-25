@@ -24,9 +24,9 @@ class TerrainSeeder extends Seeder
                 "user_id" => 1,
                 "street" => $value->street,
                 "streetNumber" => $value->streetNumber,
-                "postcode" => $value->postalcode,
+                "postcode" => $value->postcode,
                 "province" => $value->province,
-                "locality" => $value->city,
+                "locality" => $value->locality,
             ]);
 
             $terrain->addMediaFromUrl('https://www.terrain-construction.com/content/wp-content/uploads/2019/03/niveler-terrain-min-e1553698896855.jpg')->toMediaCollection('terrainImages')->save();
