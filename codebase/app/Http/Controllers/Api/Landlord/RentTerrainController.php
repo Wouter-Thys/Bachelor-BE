@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Api\landlord;
+namespace App\Http\Controllers\Api\Landlord;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RentTerrainResource;
 use Illuminate\Http\Request;
 
-class ImageController extends Controller
+class RentTerrainController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return RentTerrainResource::collection($request->user()->rentTerrains());
     }
 
     public function store(Request $request)

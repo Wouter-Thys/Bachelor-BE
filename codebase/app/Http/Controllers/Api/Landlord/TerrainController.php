@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\landlord;
+namespace App\Http\Controllers\Api\Landlord;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DeleteTerrainRequest;

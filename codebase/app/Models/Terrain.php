@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -140,5 +141,8 @@ class Terrain extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
-
+    public function rentTerrains(): HasMany
+    {
+        return $this->hasMany(RentTerrain::class);
+    }
 }

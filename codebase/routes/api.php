@@ -4,9 +4,11 @@ use App\Http\Controllers\Api\Admin\PendingLandlordController;
 use App\Http\Controllers\Api\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\Api\Guest\SearchTerrainController;
 use App\Http\Controllers\Api\Guest\TerrainController as GuestTerrainController;
-use App\Http\Controllers\Api\landlord\ImageController;
-use App\Http\Controllers\Api\landlord\TempImageController;
-use App\Http\Controllers\Api\landlord\TerrainController;
+use App\Http\Controllers\Api\Landlord\ImageController;
+use App\Http\Controllers\Api\Landlord\RentTerrainRequestController;
+use App\Http\Controllers\Api\Landlord\TempImageController;
+use App\Http\Controllers\Api\Landlord\TerrainController;
+use App\Http\Controllers\Api\User\RentTerrainController;
 use App\Http\Controllers\Api\User\RequestLandlordController;
 use App\Http\Controllers\Api\User\UpdateEmailController;
 use App\Http\Controllers\Api\User\UsersController;
@@ -38,12 +40,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             RequestLandlordController::class)->parameters(['request-landlord' => 'user'])->only(['store']);
         Route::apiResource('users', UsersController::class);
         Route::put('update/email', UpdateEmailController::class);
+        Route::post('rent-terrain', RentTerrainController::class);
     });
+
     Route::group(['middleware' => ["role:landlord"], 'prefix' => '/landlord'], function () {
+        Route::apiResource('rent-request', RentTerrainRequestController::class);
         Route::apiResource('terrain', TerrainController::class);
         Route::apiResource('terrain/images', ImageController::class);
         Route::apiResource('terrain/temp-images', TempImageController::class);
     });
+
     Route::group(['middleware' => ["role:admin"], 'prefix' => '/admin'], function () {
         Route::apiResource('users', AdminUsersController::class);
         Route::apiResource('pending-landlords',

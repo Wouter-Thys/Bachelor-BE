@@ -124,5 +124,9 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Terrain::class);
     }
 
+    public function rentTerrains(): HasMany
+    {
+        return $this->hasMany(RentTerrain::class);
+    }
 
 }
