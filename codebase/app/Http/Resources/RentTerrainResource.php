@@ -15,6 +15,7 @@ class RentTerrainResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'user' => $this->user,
             'terrain' => $this->terrain,
             'approvalStatus' => $this->approvalStatus,
