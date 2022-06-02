@@ -30,7 +30,6 @@ class RentTerrainRequestController extends Controller
     public function update(UpdateLandlordRentTerrainRequest $request, $id)
     {
         if ($request->validated()['approveTerrainRent']) {
-            ray('yeet');
             RentTerrain::where('id',
                 $id)->whereIn('terrain_id',
                 $request->user()->terrains()->get('id'))->update(['approvalStatus' => ApprovalStatusEnum::APPROVED]);
