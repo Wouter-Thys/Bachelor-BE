@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             "ics" => null,
         ]);
         $user1->assignRole('user');
-        $user1->assignRole('pending-landlord');
+        $user1->assignRole('landlord');
         $user1->addMediaFromUrl($imageUser)->toMediaCollection('landlordRequest')->save();
 
         $user2 = User::factory()->create([
