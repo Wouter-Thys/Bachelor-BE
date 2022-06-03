@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\Api\Guest\SearchTerrainController;
 use App\Http\Controllers\Api\Guest\TerrainController as GuestTerrainController;
 use App\Http\Controllers\Api\Landlord\ImageController;
+use App\Http\Controllers\Api\Landlord\RentTerrainController as LandlordRentTerrainController;
 use App\Http\Controllers\Api\Landlord\RentTerrainRequestController;
 use App\Http\Controllers\Api\Landlord\TempImageController;
 use App\Http\Controllers\Api\Landlord\TerrainController;
@@ -47,6 +48,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::group(['middleware' => ["role:landlord"], 'prefix' => '/landlord'], function () {
         Route::apiResource('rent-request', RentTerrainRequestController::class);
+        Route::apiResource('my-calendar', LandlordRentTerrainController::class);
         Route::apiResource('terrain', TerrainController::class);
         Route::apiResource('terrain/images', ImageController::class);
         Route::apiResource('terrain/temp-images', TempImageController::class);
