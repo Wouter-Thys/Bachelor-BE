@@ -16,7 +16,7 @@ class SearchTerrainRequest extends FormRequest
             "showers" => ["boolean", "nullable"],
             "toilets" => ["boolean", "nullable"],
             "sinks" => ["boolean", "nullable"],
-            "max_people" => ["integer", "nullable"],
+            "capacity" => ["integer", "nullable"],
             "hectare" => ["numeric", "nullable"],
             "search" => ["string", "nullable"],
         ];

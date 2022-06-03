@@ -23,7 +23,7 @@ class StoreTerrainRequest extends FormRequest
             "showers" => ["required", "boolean"],
             "toilets" => ["required", "boolean"],
             "sinks" => ["required", "boolean"],
-            "max_people" => ["required", "integer"],
+            "capacity" => ["required", "integer"],
             "hectare" => ["required", "numeric"],
             "supermarket_rating" => ["required", "integer", "max:5", "min:1"],
             "activities_rating" => ["required", "integer", "max:5", "min:1"],

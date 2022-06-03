@@ -34,7 +34,7 @@ class TerrainFactory extends Factory
             "showers" => $yesNo,
             "toilets" => $yesNo,
             "sinks" => $yesNo,
-            "max_people" => $this->faker->numberBetween(100, 1500),
+            "capacity" => $this->faker->numberBetween(100, 1500),
             "hectare" => $this->faker->numberBetween(1, 20),
             "supermarket_rating" => $this->faker->numberBetween(1, 5),
             "activities_rating" => $this->faker->numberBetween(1, 5),

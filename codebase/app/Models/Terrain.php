@@ -32,7 +32,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property int $showers
  * @property int $toilets
  * @property int $sinks
- * @property int $max_people
+ * @property int $capacity
  * @property int $hectare
  * @property int $supermarket_rating
  * @property int $activities_rating
@@ -111,7 +111,7 @@ class Terrain extends Model implements HasMedia
         "showers",
         "toilets",
         "sinks",
-        "max_people",
+        "capacity",
         "hectare",
         "supermarket_rating",
         "activities_rating",

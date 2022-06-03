@@ -33,7 +33,7 @@ class TerrainResource extends JsonResource
             "showers" => $this->showers,
             "toilets" => $this->toilets,
             "sinks" => $this->sinks,
-            "max_people" => $this->max_people,
+            "capacity" => $this->capacity,
             "hectare" => $this->hectare,
             "supermarket_rating" => $this->supermarket_rating,
             "activities_rating" => $this->activities_rating,

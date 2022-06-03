@@ -22,9 +22,9 @@ class SearchTerrainController extends Controller
                     ->orWhere('postcode', 'like', '%'.$request->validated()['search'].'%');
             })
             ->where(function ($query) use ($request) {
-                if ($request->validated()['max_people'] !== 0 && $request->validated()['max_people'] !== null) {
-                    $query->whereBetween('max_people',
-                        [$request->validated()['max_people'], $request->validated()['max_people'] + 50]);
+                if ($request->validated()['capacity'] !== 0 && $request->validated()['capacity'] !== null) {
+                    $query->where('capacity',
+                        '>', $request->validated()['capacity']);
                 }
             })
             ->where(function ($query) use ($request) {
