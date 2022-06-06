@@ -15,7 +15,8 @@ class TerrainController extends Controller
 
     public function index()
     {
-        return TerrainResource::collection(Terrain::all());
+        return TerrainResource::collection(Terrain::orderBy('capacity',
+            'asc')->get());
     }
 
     public function store(StoreTerrainRequest $request)

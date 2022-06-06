@@ -19,6 +19,12 @@ class SearchTerrainRequest extends FormRequest
             "capacity" => ["integer", "nullable"],
             "hectare" => ["numeric", "nullable"],
             "search" => ["string", "nullable"],
+            "orderBy" => ["required"],
+            "orderBy.column" => [
+                "required",
+                "in:capacity,hectare,supermarket_rating,activities_rating,remote_rating,bakery_rating,firstAid_rating"
+            ],
+            "orderBy.direction" => ["required", "in:asc,desc"],
         ];
     }
 }

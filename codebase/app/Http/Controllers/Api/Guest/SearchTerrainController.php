@@ -15,7 +15,6 @@ class SearchTerrainController extends Controller
         $filteredBoolean = Arr::where($request->validated(), function ($value, $key) {
             return ($value === 1);
         });
-
         $terrains = Terrain::where($filteredBoolean)
             ->where(function ($query) use ($request) {
                 $query->where('province', 'like', '%'.$request->validated()['search'].'%')
@@ -35,7 +34,8 @@ class SearchTerrainController extends Controller
                             $request->validated()['hectare'] + $request->validated()['hectare']
                         ]);
                 }
-            })->get();
+            })->orderBy($request->validated()['orderBy']['column'],
+                $request->validated()['orderBy']['direction'])->get();
 
         return TerrainResource::collection($terrains);
     }
