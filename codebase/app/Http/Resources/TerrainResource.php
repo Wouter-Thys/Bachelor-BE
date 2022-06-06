@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\RentTerrain;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TerrainResource extends JsonResource
@@ -48,7 +49,7 @@ class TerrainResource extends JsonResource
             "images" => ImageResource::collection($this->getMedia('terrainImages')),
             "owner" => UserResource::make($this->user),
             "rented_dates" => RentTerrainResource::collection(RentTerrain::with('user')->where('terrain_id',
-                $this->id)->get()),
+                $this->id)->where('endDate', ">", new Carbon())->get()),
         ];
     }
 }
