@@ -32,6 +32,9 @@ return new class extends Migration {
             $table->boolean("showers")->default(false);
             $table->boolean("toilets")->default(false);
             $table->boolean("sinks")->default(false);
+            $table->boolean("openFire")->default(false);
+            $table->boolean("hudo")->default(false);
+            $table->boolean("digging")->default(false);
             $table->integer("capacity")->default(0);
             $table->float("hectare")->default(0);
             $table->integer("supermarket_rating")->default(1);
