@@ -37,6 +37,7 @@ class TerrainResource extends JsonResource
             "openFire" => $this->openFire,
             "hudo" => $this->sinks,
             "digging" => $this->sinks,
+            "views" => $this->views,
             "capacity" => $this->capacity,
             "hectare" => $this->hectare,
             "supermarket_rating" => $this->supermarket_rating,

@@ -26,6 +26,8 @@ class TerrainController extends Controller
 
     public function show(Terrain $terrain)
     {
+        $terrain->update(['views' => $terrain->views + 1]);
+
         return TerrainResource::make($terrain);
     }
 

@@ -36,6 +36,7 @@ return new class extends Migration {
             $table->boolean("hudo")->default(false);
             $table->boolean("digging")->default(false);
             $table->integer("capacity")->default(0);
+            $table->integer("views")->default(0);
             $table->float("hectare")->default(0);
             $table->integer("supermarket_rating")->default(1);
             $table->integer("activities_rating")->default(1);

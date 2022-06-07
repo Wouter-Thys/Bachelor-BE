@@ -114,6 +114,7 @@ class Terrain extends Model implements HasMedia
         "openFire",
         "hudo",
         "digging",
+        "views",
         "capacity",
         "hectare",
         "supermarket_rating",

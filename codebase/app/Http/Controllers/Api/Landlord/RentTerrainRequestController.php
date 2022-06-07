@@ -14,7 +14,7 @@ class RentTerrainRequestController extends Controller
     public function index(Request $request)
     {
         return RentTerrainResource::collection(RentTerrain::where('approvalStatus',
-            ApprovalStatusEnum::PENDING)->findMany($request->user()->terrains()->get('id')));
+            ApprovalStatusEnum::PENDING)->whereIn('terrain_id', $request->user()->terrains()->get('id'))->get());
     }
 
     public function store(Request $request)

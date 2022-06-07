@@ -11,7 +11,8 @@ class RentTerrainController extends Controller
 {
     public function index(Request $request)
     {
-        return RentTerrainResource::collection(RentTerrain::findMany($request->user()->terrains()->get('id')));
+        return RentTerrainResource::collection(RentTerrain::whereIn('terrain_id',
+            $request->user()->terrains()->get('id'))->get());
     }
 
     public function store(Request $request)

@@ -38,6 +38,7 @@ class TerrainFactory extends Factory
             "hudo" => $this->faker->boolean(),
             "digging" => $this->faker->boolean(),
             "capacity" => $this->faker->numberBetween(100, 1500),
+            "views" => $this->faker->numberBetween(100, 1500),
             "hectare" => $this->faker->numberBetween(1, 20),
             "supermarket_rating" => $this->faker->numberBetween(1, 5),
             "activities_rating" => $this->faker->numberBetween(1, 5),
