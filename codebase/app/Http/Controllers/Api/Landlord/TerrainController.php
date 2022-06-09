@@ -7,10 +7,12 @@ use App\Http\Requests\DeleteTerrainRequest;
 use App\Http\Requests\StoreTerrainRequest;
 use App\Http\Requests\UpdateTerrainRequest;
 use App\Http\Resources\TerrainResource;
+use App\Mail\Landlord\AddedNewTerrainMail;
 use App\Models\Terrain;
 use App\Services\ImageService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
+use Mail;
 
 class TerrainController extends Controller
 {
@@ -26,6 +28,8 @@ class TerrainController extends Controller
         $terrain = Terrain::create(array_merge($request->validated(), ["user_id" => $request->user()->id]));
         ImageService::TempImageToTerrainImage($request->user()->getMedia('terrainTempImages'),
             $request->validated()['images'], $terrain);
+        
+        Mail::to($request->user()->email)->send(new AddedNewTerrainMail($terrain));
 
         return $terrain->id;
     }

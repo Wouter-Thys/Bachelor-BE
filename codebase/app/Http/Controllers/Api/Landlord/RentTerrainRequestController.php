@@ -6,8 +6,11 @@ use App\Enums\ApprovalStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateLandlordRentTerrainRequest;
 use App\Http\Resources\RentTerrainResource;
+use App\Mail\User\ApprovedRentTerrainMail;
+use App\Mail\User\RejectedRentTerrainMail;
 use App\Models\RentTerrain;
 use Illuminate\Http\Request;
+use Mail;
 
 class RentTerrainRequestController extends Controller
 {
@@ -30,14 +33,20 @@ class RentTerrainRequestController extends Controller
     public function update(UpdateLandlordRentTerrainRequest $request, $id)
     {
         if ($request->validated()['approveTerrainRent']) {
-            RentTerrain::where('id',
+            $rentTerrain = RentTerrain::where('id',
                 $id)->whereIn('terrain_id',
-                $request->user()->terrains()->get('id'))->update(['approvalStatus' => ApprovalStatusEnum::APPROVED]);
+                $request->user()->terrains()->get('id'))->first();
+            $rentTerrain->update(['approvalStatus' => ApprovalStatusEnum::APPROVED]);
+            $rentTerrain->save();
+            Mail::to($rentTerrain->user)->send(new ApprovedRentTerrainMail($rentTerrain));
         }
         if (!$request->validated()['approveTerrainRent']) {
-            RentTerrain::where('id',
+            $rentTerrain = RentTerrain::where('id',
                 $id)->whereIn('terrain_id',
-                $request->user()->terrains()->get('id'))->update(['approvalStatus' => ApprovalStatusEnum::REJECTED]);
+                $request->user()->terrains()->get('id'))->first();
+            $rentTerrain->update(['approvalStatus' => ApprovalStatusEnum::REJECTED]);
+            $rentTerrain->save();
+            Mail::to($rentTerrain->user)->send(new RejectedRentTerrainMail($rentTerrain));
         }
     }
 

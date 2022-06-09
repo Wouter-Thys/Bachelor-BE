@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RentTerrainRequest;
 use App\Http\Resources\RentTerrainResource;
+use App\Mail\Landlord\RentTerrainRequestMail as LandlordRentTerrainRequestMail;
+use App\Mail\User\RentTerrainRequestMail as UserRentTerrainRequestMail;
 use App\Models\RentTerrain;
 use App\Traits\ApiResponse;
 use Carbon\Carbon;
+use Mail;
 
 class RentTerrainController extends Controller
 {
@@ -43,11 +46,16 @@ class RentTerrainController extends Controller
                 });
         })->count();
         if ($rentTerrain === 0) {
-            return RentTerrainResource::make(RentTerrain::create(array_merge($request->validated(), [
+            $rentTerrain = RentTerrain::create(array_merge($request->validated(), [
                 'startDate' => $startDate,
                 'endDate' => $endDate,
                 'user_id' => $request->user()->id,
-            ])));
+            ]));
+
+            Mail::to($request->user()->email)->send(new UserRentTerrainRequestMail($rentTerrain));
+            Mail::to($rentTerrain->terrain->user->email)->send(new LandlordRentTerrainRequestMail($rentTerrain));
+
+            return RentTerrainResource::make($rentTerrain);
         } else {
             return $this->error(null, "Terrain is not available during the selected period!", 400);
         }

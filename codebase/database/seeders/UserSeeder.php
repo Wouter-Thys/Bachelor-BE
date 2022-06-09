@@ -9,7 +9,7 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $imageUser = 'https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-674010.jpg&fm=jpg';
+        $imageUser = 'https://images.pexels.com/photos/6623907/pexels-photo-6623907.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
 
         $adminUser = User::factory()->create([
             "name" => "Admin",

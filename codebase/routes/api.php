@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\User\RentTerrainRequestController as UserRentTerrai
 use App\Http\Controllers\Api\User\RequestLandlordController;
 use App\Http\Controllers\Api\User\UpdateEmailController;
 use App\Http\Controllers\Api\User\UsersController;
+use App\Http\Controllers\Api\User\VerifyEmailController;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/me', function (Request $request) {
         return new UserResource($request->user());
     });
+    Route::get('verify/email', VerifyEmailController::class);
 
     Route::group(['middleware' => ["role:user"], 'prefix' => '/user'], function () {
         Route::apiResource('terrain-rent', UserRentTerrainRequestController::class);

@@ -2,11 +2,13 @@
 
 namespace App\Actions\Fortify;
 
+use App\Mail\VerifyEmailMail;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
+use Mail;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -39,8 +41,9 @@ class CreateNewUser implements CreatesNewUsers
             'organization' => $input['organization'],
             'password' => Hash::make($input['password']),
         ]);
-
+        Mail::to($user->email)->send(new VerifyEmailMail());
         $user->assignRole('user');
+
         return $user;
     }
 }
