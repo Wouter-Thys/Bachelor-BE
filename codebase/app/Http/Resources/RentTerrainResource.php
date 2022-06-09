@@ -21,6 +21,7 @@ class RentTerrainResource extends JsonResource
             'approvalStatus' => $this->approvalStatus,
             'startDate' => $this->startDate,
             'endDate' => $this->endDate,
+            'camp_visa' => CampVisaResource::make($this->whenLoaded('campVisa')),
         ];
     }
 }

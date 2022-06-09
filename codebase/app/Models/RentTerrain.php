@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * App\Models\RentTerrain
@@ -32,6 +33,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static Builder|RentTerrain whereUpdatedAt($value)
  * @method static Builder|RentTerrain whereUserId($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Terrain|null $campVisa
+ * @property-read \App\Models\Terrain $terrain
+ * @property-read \App\Models\User $user
  */
 class RentTerrain extends Model
 {
@@ -40,6 +44,7 @@ class RentTerrain extends Model
     protected $fillable = [
         'user_id',
         'terrain_id',
+        'camp_visa_id',
         'startDate',
         'endDate',
     ];
@@ -52,5 +57,10 @@ class RentTerrain extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function campVisa(): HasOne
+    {
+        return $this->hasOne(CampVisa::class);
     }
 }

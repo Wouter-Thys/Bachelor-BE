@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\Landlord\RentTerrainController as LandlordRentTerra
 use App\Http\Controllers\Api\Landlord\RentTerrainRequestController;
 use App\Http\Controllers\Api\Landlord\TempImageController;
 use App\Http\Controllers\Api\Landlord\TerrainController;
+use App\Http\Controllers\Api\User\ApprovedRentTerrainController;
+use App\Http\Controllers\Api\User\CampVisaController;
 use App\Http\Controllers\Api\User\RentTerrainController;
 use App\Http\Controllers\Api\User\RentTerrainRequestController as UserRentTerrainRequestController;
 use App\Http\Controllers\Api\User\RequestLandlordController;
@@ -38,7 +40,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
 
     Route::group(['middleware' => ["role:user"], 'prefix' => '/user'], function () {
-        Route::apiResource('rent-request', UserRentTerrainRequestController::class);
+        Route::apiResource('terrain-rent', UserRentTerrainRequestController::class);
+        Route::apiResource('approved-rent', ApprovedRentTerrainController::class);
+        Route::apiResource('camp-visa', CampVisaController::class);
         Route::apiResource('request-landlord',
             RequestLandlordController::class)->parameters(['request-landlord' => 'user'])->only(['store']);
         Route::apiResource('users', UsersController::class);

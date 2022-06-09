@@ -88,6 +88,17 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static Builder|Terrain whereGoogleFirstAidRating($value)
  * @method static Builder|Terrain whereGoogleRemoteRating($value)
  * @method static Builder|Terrain whereGoogleSupermarketRating($value)
+ * @property int $openFire
+ * @property int $hudo
+ * @property int $digging
+ * @property int $views
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\RentTerrain[] $rentTerrains
+ * @property-read int|null $rent_terrains_count
+ * @method static Builder|Terrain whereCapacity($value)
+ * @method static Builder|Terrain whereDigging($value)
+ * @method static Builder|Terrain whereHudo($value)
+ * @method static Builder|Terrain whereOpenFire($value)
+ * @method static Builder|Terrain whereViews($value)
  */
 class Terrain extends Model implements HasMedia
 {

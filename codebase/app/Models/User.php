@@ -69,6 +69,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read int|null $terrains_count
  * @method static Builder|User wherePhoneNumber($value)
  * @method static Builder|User wherePhoneNumberVerifiedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\RentTerrain[] $rentTerrains
+ * @property-read int|null $rent_terrains_count
  */
 class User extends Authenticatable implements HasMedia
 {

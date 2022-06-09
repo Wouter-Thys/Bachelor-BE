@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\RentTerrain;
 use App\Models\Terrain;
 use App\Models\User;
+use App\Observers\RentTerrainObserver;
 use App\Observers\TerrainObserver;
 use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
@@ -32,6 +34,7 @@ class EventServiceProvider extends ServiceProvider
     {
         Terrain::observe(TerrainObserver::class);
         User::observe(UserObserver::class);
+        RentTerrain::observe(RentTerrainObserver::class);
     }
 
     /**

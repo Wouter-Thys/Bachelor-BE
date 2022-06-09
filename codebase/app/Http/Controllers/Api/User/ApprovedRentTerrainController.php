@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers\Api\User;
 
+use App\Enums\ApprovalStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RentTerrainResource;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class RentTerrainRequestController extends Controller
+class ApprovedRentTerrainController extends Controller
 {
     public function index(Request $request)
     {
-        return RentTerrainResource::collection($request->user()->rentTerrains()->orderBy('startDate', 'asc')->get());
+        return RentTerrainResource::collection($request->user()->rentTerrains()->where('approvalStatus',
+            ApprovalStatusEnum::APPROVED)->where('startDate', ">", Carbon::now())->orderBy('startDate',
+            'asc')->get());
     }
 
     public function store(Request $request)
@@ -28,8 +32,8 @@ class RentTerrainRequestController extends Controller
         //
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $request->user()->rentTerrains()->where('id', $id)->delete();
+        //
     }
 }
