@@ -92,7 +92,6 @@ class CampVisa extends Model
         'persons_insurance',
         'cars_insurance',
         'theft_insurance',
-        'tools_insurance',
         'social_assistance_insurance',
         'group_equipment_insurance',
         'medical_assistance_certificate',
