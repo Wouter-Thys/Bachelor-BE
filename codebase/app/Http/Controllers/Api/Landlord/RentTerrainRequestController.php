@@ -32,21 +32,20 @@ class RentTerrainRequestController extends Controller
 
     public function update(UpdateLandlordRentTerrainRequest $request, $id)
     {
-        if ($request->validated()['approveTerrainRent']) {
-            $rentTerrain = RentTerrain::where('id',
-                $id)->whereIn('terrain_id',
-                $request->user()->terrains()->get('id'))->first();
-            $rentTerrain->update(['approvalStatus' => ApprovalStatusEnum::APPROVED]);
-            $rentTerrain->save();
-            Mail::to($rentTerrain->user)->send(new ApprovedRentTerrainMail($rentTerrain));
-        }
-        if (!$request->validated()['approveTerrainRent']) {
-            $rentTerrain = RentTerrain::where('id',
-                $id)->whereIn('terrain_id',
-                $request->user()->terrains()->get('id'))->first();
-            $rentTerrain->update(['approvalStatus' => ApprovalStatusEnum::REJECTED]);
-            $rentTerrain->save();
-            Mail::to($rentTerrain->user)->send(new RejectedRentTerrainMail($rentTerrain));
+        $rentTerrain = RentTerrain::where('id',
+            $id)->whereIn('terrain_id',
+            $request->user()->terrains()->get('id'))->first();
+        if ($rentTerrain) {
+            if ($request->validated()['approveTerrainRent']) {
+                $rentTerrain->approvalStatus = ApprovalStatusEnum::APPROVED->value;
+                $rentTerrain->save();
+                Mail::to($rentTerrain->user)->send(new ApprovedRentTerrainMail($rentTerrain));
+            }
+            if (!$request->validated()['approveTerrainRent']) {
+                $rentTerrain->approvalStatus = ApprovalStatusEnum::REJECTED->value;
+                $rentTerrain->save();
+                Mail::to($rentTerrain->user)->send(new RejectedRentTerrainMail($rentTerrain));
+            }
         }
     }
 
