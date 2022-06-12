@@ -19,7 +19,7 @@ class TerrainFactory extends Factory
         $yesNo = $this->faker->boolean();
 
         return [
-            "user_id" => $this->faker->numberBetween(1, 2),
+            "user_id" => $this->faker->numberBetween(2, 3),
             "name" => $this->faker->name(),
             "description" => $this->faker->text(50),
             "street" => $this->faker->streetName(),
