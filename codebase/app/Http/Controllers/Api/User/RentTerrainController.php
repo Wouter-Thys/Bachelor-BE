@@ -22,7 +22,8 @@ class RentTerrainController extends Controller
         $endDate = Carbon::parse($request->validated()['endDate'] / 1000)->startOfDay();
         $terrainId = $request->validated()['terrain_id'];
 
-        $rentTerrain = RentTerrain::where('terrain_id', $terrainId)->where(function ($query) use (
+        $rentTerrain = RentTerrain::where('terrain_id', $terrainId)->where('approvalStatus', '!=',
+            'rejected')->where(function ($query) use (
             $startDate,
             $endDate
         ) {
