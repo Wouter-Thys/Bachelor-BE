@@ -26,7 +26,7 @@ class RentTerrainRequestMail extends Mailable
     public function __construct(RentTerrain $rentTerrain)
     {
         $this->rentTerrain = $rentTerrain;
-        $this->user = $rentTerrain->terrain->user;
+        $this->user = $rentTerrain->user;
         $this->rentTerrain->startDate = Carbon::parse($this->rentTerrain->startDate)->toDateString();
         $this->rentTerrain->endDate = Carbon::parse($this->rentTerrain->endDate)->toDateString();
         $this->terrain = $rentTerrain->terrain;

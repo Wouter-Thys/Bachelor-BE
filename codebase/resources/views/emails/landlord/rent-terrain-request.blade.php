@@ -1,7 +1,7 @@
 @component('mail::message')
 # Pending Rent Terrain Request
 
-User: {{$user->name}} requested to rent terrain: {{ $terrain->name }}
+User: {{$user->name}}, email: {{$user->email}} requested to rent terrain: {{ $terrain->name }}
 <br />
 <br />
 Start date: {{$rentTerrain->startDate}}
